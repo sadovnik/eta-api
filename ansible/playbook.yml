@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  vars_files:
+    - vars/all.yml
+  roles:
+    - { name: server, tags: server }
+    - { name: vagrant_local, tags: vagrant_local }
+    - { name: nginx, tags: nginx }
+    - { name: mongodb, tags: mongodb }
+    - { name: php, tags: php }
+    - { name: composer, tags: composer }
+    - { name: app, tags: app }

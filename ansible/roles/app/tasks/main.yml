@@ -1,0 +1,3 @@
+---
+- name: Install composer deps
+  make: chdir={{ nginx.docroot }}

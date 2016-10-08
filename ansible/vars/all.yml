@@ -1,0 +1,29 @@
+---
+server:
+    install: yes
+    packages: [ vim, git ]
+    timezone: UTC
+    locale: en_US.UTF-8
+vagrant_local:
+    install: yes
+    vm: {
+      base_box: trusty64,
+      hostname: default,
+      ip: 192.168.33.99,
+      memory: '512',
+      sharedfolder: ./,
+      syncType: nfs
+    }
+nginx:
+    install: yes
+    docroot: /vagrant
+    servername: eta.vb
+mongodb:
+    install: yes
+php:
+    install: yes
+    ppa: php5-5.6
+    packages: [ php5-cli, php5-intl, php5-mcrypt, php5-mongo, php5-fpm, php5-common, php5-curl ]
+    pecl_packages: [ mongodb ]
+composer:
+    install: yes
