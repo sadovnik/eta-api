@@ -4,6 +4,7 @@ namespace EtaApi\Tests;
 
 use PHPUnit\Framework\TestCase;
 use function EtaApi\EtaHelpers\getHaversineDistance;
+use function EtaApi\EtaHelpers\getEta;
 
 class EtaHelpersTest extends TestCase
 {
@@ -25,5 +26,12 @@ class EtaHelpersTest extends TestCase
             [ [ 30.7233, 46.4825, 37.6173, 55.7558 ], 1135060 ],
             [ [ 30.7233, 46.4825, 30.7233, 46.4825 ], 0 ]
         ];
+    }
+
+    public function testGetEta()
+    {
+        $expected = 2;
+        $actual = getEta(100, 150, 200);
+        $this->assertEquals($expected, $actual);
     }
 }

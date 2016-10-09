@@ -33,3 +33,18 @@ function getHaversineDistance($lon1, $lat1, $lon2, $lat2)
 
     return (int) $result;
 }
+
+/**
+ * Calculates ETA.
+ *
+ * @param integer $distance1
+ * @param integer $distance2
+ * @param integer $distance3
+ *
+ * @return integer
+ */
+function getEta($distance1, $distance2, $distance3)
+{
+    $result = ($distance1 * 1.5 + $distance2 * 1.5 + $distance3 * 1.5) / 3;
+    return (int) round($result / 100);
+}
