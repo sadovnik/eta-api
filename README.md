@@ -15,6 +15,8 @@ cd sadovnik-eta-api
 vagrant up
 ```
 
+The service will be available on `192.168.33.99`.
+
 ## Fixtures
 Car fixture is located at `app/fixtures/car.json`. To apply it, run `make fixture`:
 ```
