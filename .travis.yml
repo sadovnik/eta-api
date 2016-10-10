@@ -4,7 +4,7 @@ php:
 
 install:
   - composer self-update
-  - make install
+  - make force-install
 
 script: make test lint
 

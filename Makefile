@@ -1,6 +1,9 @@
 install:
 	composer install
 
+force-install:
+	composer install --ignore-platform-reqs
+
 autoload:
 	composer dump-autoload
 
