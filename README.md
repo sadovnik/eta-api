@@ -6,7 +6,24 @@
 
 A simple web service for calculus of estimated time of arrival (ETA).
 
-# Examples
+## Install
+Vagrant and Ansible ~2.1 are required.
+
+```
+git clone https://github.com/sadovnik/eta-api sadovnik-eta-api
+cd sadovnik-eta-api
+vagrant up
+```
+
+## Fixtures
+Car fixture is located at `app/fixtures/car.json`. To apply it, run `make fixture`:
+```
+vagrant ssh
+cd /vagrant
+make fixture
+```
+
+## Examples
 Success example:
 ```
 curl "http://192.168.33.99/eta?lat=55.757766&lon=37.595824"; echo
