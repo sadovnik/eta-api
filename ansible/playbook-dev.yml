@@ -3,6 +3,7 @@
   become: true
   vars_files:
     - vars/all.yml
+    - vars/dev.yml
   roles:
     - { name: server, tags: server }
     - { name: vagrant_local, tags: vagrant_local }

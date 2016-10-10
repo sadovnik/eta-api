@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     config.ssh.forward_agent = true
 
     config.vm.provision "ansible" do |ansible|
-        ansible.playbook = "ansible/playbook.yml"
+        ansible.playbook = "ansible/playbook-dev.yml"
         ansible.inventory_path = "ansible/inventories/dev"
         ansible.limit = 'all'
         ansible.tags = ENV['TAGS']

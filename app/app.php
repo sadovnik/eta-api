@@ -7,20 +7,17 @@
  */
 
 use Silex\Application;
-use Saxulum\DoctrineMongoDb\Provider\DoctrineMongoDbProvider;
-use Symfony\Component\HttpFoundation\Request;
+
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 $app = new Application;
 
-$app->register(new DoctrineMongoDbProvider(), [
-    'mongodb.options' => [ 'server' => 'mongodb://localhost:27017' ]
-]);
+$app->error(function (\Exception $e) use ($app) {
+    $statusCode = $e instanceof HttpException
+        ? $e->getStatusCode()
+        : 500;
 
-$app->get('/', function (Request $request) use ($app) {
-    return $app->json([
-        'hello' => 'there',
-        'params' => $request->query->all()
-    ]);
+    return $app->json([ 'error' => $e->getMessage() ], $statusCode);
 });
 
 return $app;
