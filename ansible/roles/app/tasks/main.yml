@@ -1,3 +1,6 @@
 ---
 - name: Install composer deps
   make: chdir={{ nginx.docroot }}
+
+- name: Migrate database
+  make: chdir={{ nginx.docroot }} target=migrate
