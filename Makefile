@@ -19,3 +19,6 @@ send-coverage:
 migrate:
 	# There's no real migration tool for simplicity's sake
 	mongo < app/migrations/indexLocation.js
+
+fixture:
+	mongoimport --db app --collection cars < app/fixtures/cars.json
