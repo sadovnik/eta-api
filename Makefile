@@ -15,3 +15,7 @@ lint:
 
 send-coverage:
 	composer exec test-reporter
+
+migrate:
+	# There's no real migration tool for simplicity's sake
+	mongo < app/migrations/indexLocation.js
