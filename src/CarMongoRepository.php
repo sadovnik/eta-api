@@ -9,6 +9,11 @@ use Doctrine\MongoDB;
 class CarMongoRepository implements CarRepositoryInterface
 {
     /**
+     * @var float max radius distance in radians
+     */
+    const MAX_DISTANCE = 0.1;
+
+    /**
      * @var DoctrineMongoDbProvider
      */
     public $mongodb;
@@ -26,21 +31,7 @@ class CarMongoRepository implements CarRepositoryInterface
      */
     public function findNearestAvailableCars(Point $point)
     {
-        $rawCars = $this->mongodb
-            ->selectDatabase('app')
-            ->selectCollection('cars')
-            ->find([
-                'available' => true,
-                'location' => [
-                    '$near' => [
-                        '$geometry' => [
-                            'type' => 'Point' ,
-                            'coordinates' => $point->asArray()
-                        ],
-                        '$maxDistance' => 0.1
-                    ]
-                ]
-            ]);
+        $rawCars = $this->makeQuery($point);
 
         $cars = [];
 
@@ -51,5 +42,30 @@ class CarMongoRepository implements CarRepositoryInterface
         }
 
         return $cars;
+    }
+
+    /**
+     * Makes mongodb query.
+     *
+     * @param Point $point
+     * @return \Iterator
+     */
+    protected function makeQuery(Point $point)
+    {
+        return $this->mongodb
+            ->selectDatabase('app')
+            ->selectCollection('cars')
+            ->find([
+                'available' => true,
+                'location' => [
+                    '$near' => [
+                        '$geometry' => [
+                            'type' => 'Point' ,
+                            'coordinates' => $point->asArray()
+                        ],
+                        '$maxDistance' => self::MAX_DISTANCE
+                    ]
+                ]
+            ]);
     }
 }
