@@ -5,3 +5,30 @@
 [![Issue Count](https://codeclimate.com/github/sadovnik/eta-api/badges/issue_count.svg)](https://codeclimate.com/github/sadovnik/eta-api)
 
 A simple web service for calculus of estimated time of arrival (ETA).
+
+# Examples
+Success example:
+```
+curl "http://192.168.33.99/eta?lat=55.757766&lon=37.595824"; echo
+```
+
+```
+{"eta":12}
+```
+
+Error example:
+
+```
+curl -i "http://192.168.33.99/eta?lat=55.757766"; echo
+```
+```
+HTTP/1.1 422 Unprocessable Entity
+Server: nginx/1.4.6 (Ubuntu)
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: no-cache
+Date: Mon, 10 Oct 2016 06:04:37 GMT
+
+{"error":"Lat and lon parameters are required"}
+```
