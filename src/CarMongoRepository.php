@@ -14,16 +14,27 @@ class CarMongoRepository implements CarRepositoryInterface
     const MAX_DISTANCE = 0.1;
 
     /**
+     * @var string name of MongoDB collection
+     */
+    const COLLECTION = 'cars';
+
+    /**
      * @var DoctrineMongoDbProvider
      */
-    public $mongodb;
+    private $mongodb;
+
+    /**
+     * @var string name of MongoDB db
+     */
+    private $db;
 
     /**
      * @param Doctrine\MongoDB\Connection $mongodb
      */
-    public function __construct(MongoDB\Connection $mongodb)
+    public function __construct(MongoDB\Connection $mongodb, $db)
     {
         $this->mongodb = $mongodb;
+        $this->db = $db;
     }
 
     /**
@@ -45,7 +56,7 @@ class CarMongoRepository implements CarRepositoryInterface
     }
 
     /**
-     * Makes mongodb query.
+     * Makes  query.
      *
      * @param Point $point
      * @return \Iterator
@@ -53,8 +64,8 @@ class CarMongoRepository implements CarRepositoryInterface
     protected function makeQuery(Point $point)
     {
         return $this->mongodb
-            ->selectDatabase('app')
-            ->selectCollection('cars')
+            ->selectDatabase($this->db)
+            ->selectCollection(self::COLLECTION)
             ->find([
                 'available' => true,
                 'location' => [
