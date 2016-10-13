@@ -38,7 +38,5 @@ $app->get('/eta', function (Request $request) use ($app) {
 
     $eta = eta($distance1, $distance2, $distance3);
 
-    $response = new JsonResponse([ 'eta' => $eta ], 200);
-    $response->setTtl($app['http_cache.ttl']);
-    return $response;
+    return $app->json([ 'eta' => $eta ]);
 });

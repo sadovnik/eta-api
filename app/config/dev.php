@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Saxulum\DoctrineMongoDb\Provider\DoctrineMongoDbProvider;
 use Silex\Provider\HttpCacheServiceProvider;
 use EtaApi\CarMongoRepository;
@@ -22,3 +24,8 @@ $app->register(new HttpCacheServiceProvider(), [
 ]);
 
 $app['http_cache.ttl'] = 10;
+
+$app->after(function (Request $request, Response $response) use (&$app) {
+    $response->setTtl($app['http_cache.ttl']);
+    return $response;
+});
