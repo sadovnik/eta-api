@@ -2,6 +2,7 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use function EtaApi\EtaHelpers\haversineDistance;
 use function EtaApi\EtaHelpers\eta;
@@ -37,5 +38,7 @@ $app->get('/eta', function (Request $request) use ($app) {
 
     $eta = eta($distance1, $distance2, $distance3);
 
-    return $app->json([ 'eta' => $eta ]);
+    $response = new JsonResponse([ 'eta' => $eta ], 200);
+    $response->setTtl($app['http_cache.ttl']);
+    return $response;
 });

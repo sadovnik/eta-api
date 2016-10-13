@@ -19,4 +19,4 @@ if (getenv('APP_ENV') === 'dev') {
 
 require __DIR__ . '/../app/controller.php';
 
-$app->run();
+$app['http_cache']->run();
