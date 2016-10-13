@@ -4,7 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 use function EtaApi\EtaHelpers\haversineDistance;
-use function EtaApi\EtaHelpers\getEta;
+use function EtaApi\EtaHelpers\eta;
 use EtaApi\CarRepositoryInterface;
 use EtaApi\Point;
 
@@ -35,7 +35,7 @@ $app->get('/eta', function (Request $request) use ($app) {
 
     list ($distance1, $distance2, $distance3) = $distances;
 
-    $eta = getEta($distance1, $distance2, $distance3);
+    $eta = eta($distance1, $distance2, $distance3);
 
     return $app->json([ 'eta' => $eta ]);
 });
