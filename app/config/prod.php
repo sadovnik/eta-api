@@ -32,8 +32,3 @@ $app->register(new HttpCacheServiceProvider(), [
 ]);
 
 $app['http_cache.ttl'] = 10;
-
-$app->after(function (Request $request, Response $response) use (&$app) {
-    $response->setTtl($app['http_cache.ttl']);
-    return $response;
-});

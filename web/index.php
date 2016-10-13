@@ -17,6 +17,7 @@ if (getenv('APP_ENV') === 'dev') {
     require __DIR__ . '/../app/config/prod.php';
 }
 
+require __DIR__ . '/../app/middlewares/cache.php';
 require __DIR__ . '/../app/controller.php';
 
 $app['http_cache']->run();
