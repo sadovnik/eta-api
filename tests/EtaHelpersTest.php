@@ -3,22 +3,22 @@
 namespace EtaApi\Tests;
 
 use PHPUnit\Framework\TestCase;
-use function EtaApi\EtaHelpers\getHaversineDistance;
+use function EtaApi\EtaHelpers\haversineDistance;
 use function EtaApi\EtaHelpers\getEta;
 
 class EtaHelpersTest extends TestCase
 {
     /**
-     * @dataProvider provideGetHaversineDistanceData
+     * @dataProvider provideHaversineDistanceData
      */
-    public function testGetHaversineDistance($coordinates, $expected)
+    public function testHaversineDistance($coordinates, $expected)
     {
         list ($lonFrom, $latFrom, $lonTo, $latTo) = $coordinates;
-        $result = getHaversineDistance($lonFrom, $latFrom, $lonTo, $latTo);
+        $result = HaversineDistance($lonFrom, $latFrom, $lonTo, $latTo);
         $this->assertEquals($expected, $result);
     }
 
-    public function provideGetHaversineDistanceData()
+    public function provideHaversineDistanceData()
     {
         return [
             [ [ 37.629847, 55.756457, 37.632851, 55.753214 ], 406 ],

@@ -16,7 +16,7 @@ const EARTH_RADIUS = 6371000;
  *
  * @return integer distance in meters
  */
-function getHaversineDistance($lon1, $lat1, $lon2, $lat2)
+function haversineDistance($lon1, $lat1, $lon2, $lat2)
 {
     $lat1Rad = deg2rad($lat1);
     $lat2Rad = deg2rad($lat2);

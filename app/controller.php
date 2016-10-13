@@ -3,7 +3,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
-use function EtaApi\EtaHelpers\getHaversineDistance;
+use function EtaApi\EtaHelpers\haversineDistance;
 use function EtaApi\EtaHelpers\getEta;
 use EtaApi\CarRepositoryInterface;
 use EtaApi\Point;
@@ -28,7 +28,7 @@ $app->get('/eta', function (Request $request) use ($app) {
 
     $distances = array_map(
         function ($car) use ($userLon, $userLat) {
-            return getHaversineDistance($userLon, $userLat, $car->getLocation()->getLon(), $car->getLocation()->getLat());
+            return haversineDistance($userLon, $userLat, $car->getLocation()->getLon(), $car->getLocation()->getLat());
         },
         array_slice($cars, 0, 3)
     );
